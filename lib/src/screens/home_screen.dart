@@ -1,11 +1,6 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:lp_counter/src/screens/setting_screen.dart';
 import 'package:lp_counter/src/styles/button.dart';
-import 'package:lp_counter/src/styles/color.dart';
-import 'package:lp_counter/main.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
