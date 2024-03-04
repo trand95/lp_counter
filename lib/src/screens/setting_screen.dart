@@ -49,7 +49,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       backgroundColor: Colors.orangeAccent,
                       child: Icon(Icons.person),
                     ),
-                    label: Text('Mapp'),
+                    label: Text('Mapps'),
                   ),
                 ),
               )
