@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Layout42 extends StatelessWidget {
-  final double height = 36;
-  final double width = 50;
-  const Layout42({super.key});
+  final double height_1 = 80;
+  final double height_2 = 37;
+  final double width_1 = 40;
+  final double width_2 = 70;
+  final Color borderColor;
+  const Layout42({super.key, required this.borderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -12,46 +15,41 @@ class Layout42 extends StatelessWidget {
       width: 180,
       decoration: BoxDecoration(
           border:
-              Border.all(color: Color.fromARGB(255, 42, 221, 173), width: 3),
+              Border.all(color: borderColor, width: 3),
           borderRadius: BorderRadius.circular(4),
           color: Colors.black),
-      child: Column(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Row(
+          Container(
+                height: height_1,
+                width: width_1,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4), color: Colors.grey),
+              ),
+          Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                height: height,
-                width: width,
+                height: height_2,
+                width: width_2,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4), color: Colors.grey),
               ),
               Container(
-                height: height,
-                width: width,
+                height: height_2,
+                width: width_2,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4), color: Colors.grey),
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                height: height,
-                width: width,
+         Container(
+                height: height_1,
+                width: width_1,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4), color: Colors.grey),
               ),
-              Container(
-                height: height,
-                width: width,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4), color: Colors.grey),
-              ),
-            ],
-          ),
         ],
       ),
     );

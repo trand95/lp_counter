@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:gap/gap.dart';
+
 import 'package:lp_counter/src/styles/button_text.dart';
 import 'package:lp_counter/src/styles/app_buttons.dart';
 import 'package:lp_counter/src/styles/color.dart';
-import 'package:lp_counter/src/styles/layout_41.dart';
-import 'package:lp_counter/src/styles/layout_42.dart';
+import 'package:lp_counter/src/styles/custom_layout.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -96,9 +96,8 @@ class _SettingScreenState extends State<SettingScreen> {
   Visibility _layoutSection() {
     return Visibility(
       visible: isVisible,
-      child: Wrap(
-        spacing: 30,
-        runSpacing: 30,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(
           2,
           (index) => InkWell(
@@ -107,16 +106,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 selectedLayout = index;
               });
             },
-            child: const Layout41(),/*AppButtons(
-                height: 100,
-                width: 150,
-                color: white,
-                backgroundColor: const Color.fromARGB(255, 101, 98, 98),
-                borderColor: selectedLayout == index
-                    ? white
-                    : const Color.fromARGB(255, 101, 98, 98),
-                isIcon: false,
-                text: (index + 1).toString()),*/
+            child: CustomLayout(
+              index: index,
+              borderColor_: selectedLayout == index ? white : Colors.black,
+            ),
           ),
         ),
       ),
@@ -133,11 +126,7 @@ class _SettingScreenState extends State<SettingScreen> {
           onTap: () {
             setState(() {
               selectedPlayer = index;
-              (selectedPlayer == 3 ||
-                      selectedPlayer == 4 ||
-                      selectedPlayer == 5)
-                  ? isVisible = true
-                  : isVisible = false;
+              isVisible = selectedPlayer >= 3;
             });
           },
           child: AppButtons(

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class Layout41 extends StatelessWidget {
   final double height = 36;
   final double width = 77;
-  const Layout41({super.key});
+  final Color borderColor;
+
+  const Layout41({super.key, required this.borderColor});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class Layout41 extends StatelessWidget {
       height: 95,
       width: 180,
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.blue, width: 3),
+          border: Border.all(color: borderColor, width: 3),
           borderRadius: BorderRadius.circular(4),
           color: Colors.black),
       child: Column(
