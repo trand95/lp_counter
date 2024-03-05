@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lp_counter/src/screens/home_screen.dart';
 import 'package:lp_counter/src/screens/setting_screen.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(MagicLifeCounter());
 }
 

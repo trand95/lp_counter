@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:lp_counter/src/styles/button.dart';
 
@@ -19,13 +20,24 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: Column(
             children: [
-              const Text(
-                'MAGIC',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 80,
-                    fontFamily: 'SATAM'),
+              ShaderMask(
+                shaderCallback: (bounds) => const RadialGradient(
+                  center: Alignment.center,
+                  radius: 1.0,
+                  colors: [
+                    Colors.yellow,
+                    Colors.deepOrange,
+                  ],
+                  tileMode: TileMode.mirror,
+                ).createShader(bounds),
+                child: const Text(
+                  'MAGIC',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 80,
+                      fontFamily: 'SATAM'),
+                ),
               ),
               const Text(
                 '    Life Counter',

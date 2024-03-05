@@ -5,6 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:lp_counter/src/styles/button_text.dart';
 import 'package:lp_counter/src/styles/app_buttons.dart';
 import 'package:lp_counter/src/styles/color.dart';
+import 'package:lp_counter/src/styles/layout_41.dart';
+import 'package:lp_counter/src/styles/layout_42.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -39,23 +41,35 @@ class _SettingScreenState extends State<SettingScreen> {
       body: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
         child: Center(
-          child: Column(
-            children: [
-              ButtonText(size: 30, text: 'Players', color: white),
-              const Gap(20),
-              _playerSection(),
-              const Gap(20),
-              Visibility(
-                visible: isVisible,
-                child: ButtonText(size: 30, text: 'Layout', color: white),
-              ),
-              const Gap(20),
-              _layoutSection(),
-              const Gap(20),
-              ButtonText(size: 30, text: 'Life', color: white),
-              const Gap(20),
-              _lifeSection(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                ButtonText(size: 20, text: 'Players', color: white),
+                const Gap(20),
+                _playerSection(),
+                const Gap(20),
+                Visibility(
+                  visible: isVisible,
+                  child: ButtonText(size: 20, text: 'Layout', color: white),
+                ),
+                const Gap(20),
+                _layoutSection(),
+                const Gap(20),
+                ButtonText(size: 20, text: 'Life', color: white),
+                const Gap(20),
+                _lifeSection(),
+                const Gap(50),
+                AppButtons(
+                  height: 50,
+                  width: 250,
+                  color: white,
+                  backgroundColor: Colors.orange,
+                  borderColor: Colors.orange,
+                  text: 'Play',
+                ),
+                const Gap(50),
+              ],
+            ),
           ),
         ),
       ),
@@ -64,7 +78,24 @@ class _SettingScreenState extends State<SettingScreen> {
 
   Visibility _layoutSection() {
     return Visibility(
-          visible: isVisible,
+        visible: isVisible,
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              selectedLayout = index;
+            });
+          },
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [Layout41(), Layout42()],
+          ),
+        ));
+  }
+
+/*
+  Visibility _layoutSection() {
+    return Visibility(
+      visible: isVisible,
       child: Wrap(
         spacing: 30,
         runSpacing: 30,
@@ -76,7 +107,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 selectedLayout = index;
               });
             },
-            child: AppButtons(
+            child: const Layout41(),/*AppButtons(
                 height: 100,
                 width: 150,
                 color: white,
@@ -85,13 +116,13 @@ class _SettingScreenState extends State<SettingScreen> {
                     ? white
                     : const Color.fromARGB(255, 101, 98, 98),
                 isIcon: false,
-                text: (index + 1).toString()),
+                text: (index + 1).toString()),*/
           ),
         ),
       ),
     );
   }
-
+*/
   Wrap _playerSection() {
     return Wrap(
       spacing: 30,
