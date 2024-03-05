@@ -75,7 +75,7 @@ class _SettingScreenState extends State<SettingScreen> {
       ),
     );
   }
-
+/*
   Visibility _layoutSection() {
     return Visibility(
         visible: isVisible,
@@ -91,8 +91,8 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
         ));
   }
+*/
 
-/*
   Visibility _layoutSection() {
     return Visibility(
       visible: isVisible,
@@ -122,7 +122,7 @@ class _SettingScreenState extends State<SettingScreen> {
       ),
     );
   }
-*/
+
   Wrap _playerSection() {
     return Wrap(
       spacing: 30,
