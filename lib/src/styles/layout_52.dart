@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Layout41 extends StatelessWidget {
+class Layout52 extends StatelessWidget {
   final double height = 36;
-  final double width = 77;
+  final double height_2 = 78;
+  final double width = 48;
   final Color borderColor;
 
-  const Layout41({super.key, required this.borderColor});
+  const Layout52({super.key, required this.borderColor});
 
   Widget buildContainer(double height) {
     return Container(
@@ -16,14 +17,14 @@ class Layout41 extends StatelessWidget {
     );
   }
 
-  Row buildRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        buildContainer(height),
-        buildContainer(height),
-      ],
-    );
+    Column buildColumn() {
+    return Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            buildContainer(height),
+            buildContainer(height),
+          ],
+        );
   }
 
   @override
@@ -35,13 +36,16 @@ class Layout41 extends StatelessWidget {
           border: Border.all(color: borderColor, width: 3),
           borderRadius: BorderRadius.circular(4),
           color: Colors.black),
-      child: Column(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          buildRow(),
-          buildRow(),
+          buildColumn(),
+          buildColumn(),
+          buildContainer(height_2),
         ],
       ),
     );
   }
+
+
 }

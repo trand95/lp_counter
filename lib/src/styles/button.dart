@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lp_counter/src/styles/color.dart';
 
 final ButtonStyle buttonStart = ElevatedButton.styleFrom(
   minimumSize: const Size(250, 50),

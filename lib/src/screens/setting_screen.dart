@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:gap/gap.dart';
-
 import 'package:lp_counter/src/styles/button_text.dart';
 import 'package:lp_counter/src/styles/app_buttons.dart';
 import 'package:lp_counter/src/styles/color.dart';
@@ -16,9 +13,9 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  int selectedPlayer = -1;
-  int selectedLayout = -1;
-  int selectedLife = -1;
+  int selectedPlayer = 1;
+  int selectedLayout = 0;
+  int selectedLife = 0;
   bool isVisible = false;
 
   @override
@@ -75,23 +72,6 @@ class _SettingScreenState extends State<SettingScreen> {
       ),
     );
   }
-/*
-  Visibility _layoutSection() {
-    return Visibility(
-        visible: isVisible,
-        child: InkWell(
-          onTap: () {
-            setState(() {
-              selectedLayout = index;
-            });
-          },
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [Layout41(), Layout42()],
-          ),
-        ));
-  }
-*/
 
   Visibility _layoutSection() {
     return Visibility(
@@ -107,8 +87,9 @@ class _SettingScreenState extends State<SettingScreen> {
               });
             },
             child: CustomLayout(
+              selectedPlayer: selectedPlayer,
               index: index,
-              borderColor_: selectedLayout == index ? white : Colors.black,
+              borderColor: selectedLayout == index ? white : Colors.black,
             ),
           ),
         ),
@@ -149,25 +130,44 @@ class _SettingScreenState extends State<SettingScreen> {
       spacing: 30,
       runSpacing: 30,
       children: List.generate(
-        6,
+        4,
         (index) => InkWell(
           onTap: () {
             setState(() {
               selectedLife = index;
             });
           },
-          child: AppButtons(
-              height: 60,
-              width: 100,
+          child: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: AppButtons(
+              height: 100,
+              width: 168,
               color: white,
               backgroundColor: const Color.fromARGB(255, 101, 98, 98),
               borderColor: selectedLife == index
                   ? white
                   : const Color.fromARGB(255, 101, 98, 98),
               isIcon: false,
-              text: (index + 1).toString()),
+              text: _getLifeButtonText(index),
+            ),
+          ),
         ),
       ),
     );
+  }
+
+  String _getLifeButtonText(int index) {  
+    switch (index) {
+      case 0:
+        return '20';
+      case 1:
+        return '30';
+      case 2:
+        return '40';
+      case 3:
+        return '50';
+      default:
+        return '';
+    }
   }
 }
