@@ -9,15 +9,12 @@ class AppButtons extends StatelessWidget {
   final String? text;
   final IconData? icon;
   final bool isIcon;
-  
 
   const AppButtons(
       {super.key,
-
       this.isIcon = false,
       this.text,
       this.icon,
-      
       required this.height,
       required this.width,
       required this.color,
@@ -26,7 +23,6 @@ class AppButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       width: width,
       height: height,

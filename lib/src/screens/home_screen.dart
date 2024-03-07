@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lp_counter/src/styles/button.dart';
+import 'package:wakelock/wakelock.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -51,7 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
               const Gap(80),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/setting');
+                  context.go('/settings');
+                  Wakelock.enable();
 
                   /*Navigator.push(
                     context,

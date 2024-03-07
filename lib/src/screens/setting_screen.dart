@@ -4,6 +4,7 @@ import 'package:lp_counter/src/styles/button_text.dart';
 import 'package:lp_counter/src/styles/app_buttons.dart';
 import 'package:lp_counter/src/styles/color.dart';
 import 'package:lp_counter/src/styles/custom_layout.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -33,7 +34,7 @@ class _SettingScreenState extends State<SettingScreen> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             color: Colors.white,
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => context.go('/'),
           )),
       body: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
@@ -156,7 +157,7 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  String _getLifeButtonText(int index) {  
+  String _getLifeButtonText(int index) {
     switch (index) {
       case 0:
         return '20';
