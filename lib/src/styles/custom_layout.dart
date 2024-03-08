@@ -21,7 +21,6 @@ class CustomLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (selectedPlayer) {
       case 3:
-        
         if (index == 0) {
           return Layout41(borderColor: borderColor);
         } else if (index == 1) {
@@ -29,7 +28,6 @@ class CustomLayout extends StatelessWidget {
         }
         break;
       case 4:
-      
         if (index == 0) {
           return Layout51(borderColor: borderColor);
         } else if (index == 1) {
@@ -37,7 +35,6 @@ class CustomLayout extends StatelessWidget {
         }
         break;
       case 5:
-       
         if (index == 0) {
           return Layout61(borderColor: borderColor);
         } else if (index == 1) {

@@ -54,13 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   context.go('/settings');
                   Wakelock.enable();
-
-                  /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SettingScreen(),
-                    ),
-                  );*/
                 },
                 style: buttonStart,
                 child: const Text(

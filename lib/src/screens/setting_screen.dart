@@ -18,24 +18,24 @@ class _SettingScreenState extends State<SettingScreen> {
   int selectedLayout = 0;
   int selectedLife = 0;
   bool isVisible = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-          toolbarHeight: 33,
-          backgroundColor: Colors.black,
-          centerTitle: true,
-          title: const Text(
-            'Settings',
-            style: TextStyle(color: Colors.white54),
-          ),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            color: Colors.white,
-            onPressed: () => context.go('/'),
-          )),
+        toolbarHeight: 33,
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: const Text(
+          'Settings',
+          style: TextStyle(color: Colors.white54),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          color: Colors.white,
+          onPressed: () => context.go('/'),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
         child: Center(
@@ -57,13 +57,51 @@ class _SettingScreenState extends State<SettingScreen> {
                 const Gap(20),
                 _lifeSection(),
                 const Gap(50),
-                AppButtons(
-                  height: 50,
-                  width: 250,
-                  color: white,
-                  backgroundColor: Colors.orange,
-                  borderColor: Colors.orange,
-                  text: 'Play',
+                InkWell(
+                  onTap: () {
+                    switch (selectedPlayer) {
+                      case 0:
+                        context.go('/board1');
+                        break;
+                      case 1:
+                        context.go('/board2');
+                        break;
+                      case 2:
+                        context.go('/board3');
+                        break;
+                      case 3:
+                        if (selectedLayout == 0) {
+                          context.go('/board41');
+                        } else {
+                          context.go('/board42');
+                        }
+                        break;
+                      case 4:
+                        if (selectedLayout == 0) {
+                          context.go('/board51');
+                        } else {
+                          context.go('/board52');
+                        }
+                        break;
+                      case 5:
+                        if (selectedLayout == 0) {
+                          context.go('/board61');
+                        } else {
+                          context.go('/board62');
+                        }
+                        break;
+                      default:
+                        context.go('/board1');
+                    }
+                  },
+                  child: AppButtons(
+                    height: 50,
+                    width: 250,
+                    color: white,
+                    backgroundColor: Colors.orange,
+                    borderColor: Colors.orange,
+                    text: 'Play',
+                  ),
                 ),
                 const Gap(50),
               ],
