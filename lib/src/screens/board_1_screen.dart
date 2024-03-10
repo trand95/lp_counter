@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:go_router/go_router.dart';
 
@@ -15,7 +17,7 @@ class _Board1ScreenState extends State<Board1Screen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        toolbarHeight: 33,
+        toolbarHeight: 30,
         backgroundColor: Colors.black,
         centerTitle: true,
         title: const Text(
@@ -34,10 +36,12 @@ class _Board1ScreenState extends State<Board1Screen> {
 
   Widget buildContainer(context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4), color: Colors.yellow),
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(4),
+        ),
       ),
     );
   }

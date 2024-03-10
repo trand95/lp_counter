@@ -15,7 +15,7 @@ class _Board2ScreenState extends State<Board2Screen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        toolbarHeight: 33,
+        toolbarHeight: 30,
         backgroundColor: Colors.black,
         centerTitle: true,
         title: const Text(
@@ -28,16 +28,30 @@ class _Board2ScreenState extends State<Board2Screen> {
           onPressed: () => context.go('/settings'),
         ),
       ),
-      body: buildContainer(context),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: buildContainer(context),
+            ),
+            Expanded(
+              child: buildContainer(context),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   Widget buildContainer(context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4), color: Colors.orange),
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(4),
+        ),
       ),
     );
   }

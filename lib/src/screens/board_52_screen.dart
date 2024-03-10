@@ -14,7 +14,7 @@ class _Board52ScreenState extends State<Board52Screen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        toolbarHeight: 33,
+        toolbarHeight: 30,
         backgroundColor: Colors.black,
         centerTitle: true,
         title: const Text(
@@ -27,16 +27,60 @@ class _Board52ScreenState extends State<Board52Screen> {
           onPressed: () => context.go('/settings'),
         ),
       ),
-      body: buildContainer(context),
+      body: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 10,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: buildContainer(context),
+                  ),
+                  Expanded(
+                    child: buildContainer(context),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 10,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: buildContainer(context),
+                  ),
+                  Expanded(
+                    child: buildContainer(context),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 8,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: buildContainer(context),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
   Widget buildContainer(context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4), color: Colors.lightBlue),
+          color: Colors.blue,
+          borderRadius: BorderRadius.circular(4),
+        ),
       ),
     );
   }
