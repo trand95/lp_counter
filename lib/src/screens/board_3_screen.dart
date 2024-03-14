@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 class Board3Screen extends StatefulWidget {
@@ -11,6 +13,7 @@ class Board3Screen extends StatefulWidget {
 class _Board3ScreenState extends State<Board3Screen> {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -27,29 +30,50 @@ class _Board3ScreenState extends State<Board3Screen> {
           onPressed: () => context.go('/settings'),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Expanded(
-              flex: 10,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: buildContainer(context),
+      body: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 10,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: buildContainer(context),
+                      ),
+                      Expanded(
+                        child: buildContainer(context),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: buildContainer(context),
-                  ),
-                ],
+                ),
+                Expanded(
+                  flex: 5,
+                  child: buildContainer(context),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            top: height * 0.6,
+            bottom: height * 0.3,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.black,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                color: Colors.white70,
+                // iconSize: 60,
+                icon: const Icon(Icons.menu),
+                onPressed: () {},
               ),
             ),
-            Expanded(
-              flex: 5,
-              child: buildContainer(context),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:go_router/go_router.dart';
 
 class Board2Screen extends StatefulWidget {
@@ -28,18 +27,36 @@ class _Board2ScreenState extends State<Board2Screen> {
           onPressed: () => context.go('/settings'),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: buildContainer(context),
+      body: Stack(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Expanded(
+                  child: buildContainer(context),
+                ),
+                Expanded(
+                  child: buildContainer(context),
+                ),
+              ],
             ),
-            Expanded(
-              child: buildContainer(context),
+          ),
+          Center(
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.black,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                color: Colors.white70,
+                iconSize: 30,
+                icon: const Icon(Icons.menu),
+                onPressed: () {},
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -47,11 +64,33 @@ class _Board2ScreenState extends State<Board2Screen> {
   Widget buildContainer(context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.circular(4),
-        ),
+      child: Row(
+        children: [
+          Expanded(
+            child: InkWell(
+              splashColor: Colors.transparent,
+              onTap: () {const Text('test');},
+              child: Ink(
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(4), bottomLeft: Radius.circular(4)),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: InkWell(
+              splashColor: Colors.transparent,
+              onTap: () {},
+              child: Ink(
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

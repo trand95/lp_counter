@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:go_router/go_router.dart';
 
 class Board1Screen extends StatefulWidget {
@@ -30,18 +27,65 @@ class _Board1ScreenState extends State<Board1Screen> {
           onPressed: () => context.go('/settings'),
         ),
       ),
-      body: buildContainer(context),
+      body: Stack(
+        children: <Widget>[
+          buildContainer(context),
+          Center(
+            heightFactor: 2,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.black,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                color: Colors.white70,
+                iconSize: 30,
+                icon: const Icon(Icons.menu),
+                onPressed: () {},
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget buildContainer(context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.circular(4),
-        ),
+      padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: InkWell(
+              splashColor: Colors.transparent,
+              onTap: () {
+                const Text('test');
+              },
+              child: Ink(
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(4),
+                      bottomLeft: Radius.circular(4)),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: InkWell(
+              splashColor: Colors.transparent,
+              onTap: () {},
+              child: Ink(
+                decoration: const BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(4),
+                      bottomRight: Radius.circular(4)),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
