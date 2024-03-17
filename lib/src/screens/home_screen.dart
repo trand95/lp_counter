@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lp_counter/src/routes/routes_name.dart';
 import 'package:lp_counter/src/styles/button.dart';
 import 'package:wakelock/wakelock.dart';
 
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Gap(80),
               ElevatedButton(
                 onPressed: () {
-                  context.go('/settings');
+                  context.goNamed(RouteNames.settings);
                   Wakelock.enable();
                 },
                 style: buttonStart,

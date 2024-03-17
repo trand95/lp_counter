@@ -1,14 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lp_counter/src/models/player.dart';
+import 'package:lp_counter/src/widgets/board_builders.dart';
 
 class Board1Screen extends StatefulWidget {
-  const Board1Screen({super.key});
+  final int initLife;
+  const Board1Screen({super.key, required this.initLife});
 
   @override
   State<Board1Screen> createState() => _Board1ScreenState();
 }
 
 class _Board1ScreenState extends State<Board1Screen> {
+  late List<Player> players;
+  static const List<int> startingLives = [20, 30, 40, 50];
+
+  int getStartingLife(int initLife) {
+    return initLife >= 0 && initLife < startingLives.length
+        ? startingLives[initLife]
+        : initLife;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    int startingLife = getStartingLife(widget.initLife);
+    players = List.generate(1, (index) => Player(lifePoints: startingLife));
+  }
+
+  void _updateLife(int playerIndex, int delta) {
+    setState(() {
+      players[playerIndex].lifePoints += delta;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +54,12 @@ class _Board1ScreenState extends State<Board1Screen> {
       ),
       body: Stack(
         children: <Widget>[
-          buildContainer(context),
-          Center(
-            heightFactor: 2,
+          RotatedBox(
+            quarterTurns: 0,
+            child: buildPlayerRow(0, _updateLife, players),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
             child: Container(
               decoration: const BoxDecoration(
                 color: Colors.black,
@@ -42,46 +70,6 @@ class _Board1ScreenState extends State<Board1Screen> {
                 iconSize: 30,
                 icon: const Icon(Icons.menu),
                 onPressed: () {},
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildContainer(context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-      child: Row(
-        children: [
-          Expanded(
-            child: InkWell(
-              splashColor: Colors.transparent,
-              onTap: () {
-                const Text('test');
-              },
-              child: Ink(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(4),
-                      bottomLeft: Radius.circular(4)),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: InkWell(
-              splashColor: Colors.transparent,
-              onTap: () {},
-              child: Ink(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(4),
-                      bottomRight: Radius.circular(4)),
-                ),
               ),
             ),
           ),

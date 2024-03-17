@@ -1,14 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lp_counter/src/models/player.dart';
+import 'package:lp_counter/src/widgets/board_builders.dart';
 
 class Board2Screen extends StatefulWidget {
-  const Board2Screen({super.key});
+  final int initLife;
+  const Board2Screen({super.key, required this.initLife});
 
   @override
   State<Board2Screen> createState() => _Board2ScreenState();
 }
 
 class _Board2ScreenState extends State<Board2Screen> {
+  late List<Player> players;
+  static const List<int> startingLives = [20, 30, 40, 50];
+
+  int getStartingLife(int initLife) {
+    return initLife >= 0 && initLife < startingLives.length
+        ? startingLives[initLife]
+        : initLife;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    int startingLife = getStartingLife(widget.initLife);
+    players = List.generate(2, (index) => Player(lifePoints: startingLife));
+  }
+
+  void _updateLife(int playerIndex, int delta) {
+    setState(() {
+      players[playerIndex].lifePoints += delta;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,15 +59,21 @@ class _Board2ScreenState extends State<Board2Screen> {
             child: Column(
               children: [
                 Expanded(
-                  child: buildContainer(context),
+                  child: RotatedBox(
+                    quarterTurns: 2,
+                    child: buildPlayerRow(0, _updateLife, players),
+                  ),
                 ),
                 Expanded(
-                  child: buildContainer(context),
+                  child: RotatedBox(
+                    quarterTurns: 0,
+                    child: buildPlayerRow(1, _updateLife, players),
+                  ),
                 ),
               ],
             ),
           ),
-          Center(
+          Align(
             child: Container(
               decoration: const BoxDecoration(
                 color: Colors.black,
@@ -50,43 +81,9 @@ class _Board2ScreenState extends State<Board2Screen> {
               ),
               child: IconButton(
                 color: Colors.white70,
-                iconSize: 30,
+                // iconSize: 30,
                 icon: const Icon(Icons.menu),
                 onPressed: () {},
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildContainer(context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-      child: Row(
-        children: [
-          Expanded(
-            child: InkWell(
-              splashColor: Colors.transparent,
-              onTap: () {const Text('test');},
-              child: Ink(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(4), bottomLeft: Radius.circular(4)),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: InkWell(
-              splashColor: Colors.transparent,
-              onTap: () {},
-              child: Ink(
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
-                ),
               ),
             ),
           ),

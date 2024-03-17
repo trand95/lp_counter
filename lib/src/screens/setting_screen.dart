@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:lp_counter/src/routes/routes_name.dart';
 import 'package:lp_counter/src/styles/button_text.dart';
 import 'package:lp_counter/src/styles/app_buttons.dart';
 import 'package:lp_counter/src/styles/color.dart';
@@ -17,7 +18,10 @@ class _SettingScreenState extends State<SettingScreen> {
   int selectedPlayer = 1;
   int selectedLayout = 0;
   int selectedLife = 0;
+  //String initialLife = '100';
+
   bool isVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,37 +65,82 @@ class _SettingScreenState extends State<SettingScreen> {
                   onTap: () {
                     switch (selectedPlayer) {
                       case 0:
-                        context.go('/board1');
+                        context.pushNamed(
+                          RouteNames.board1,
+                          pathParameters: {
+                            'initialLife': selectedLife.toString()
+                          },
+                        );
                         break;
                       case 1:
-                        context.go('/board2');
+                        context.pushNamed(
+                          RouteNames.board2,
+                          pathParameters: {
+                            'initialLife': selectedLife.toString()
+                          },
+                        );
                         break;
                       case 2:
-                        context.go('/board3');
+                        context.pushNamed(
+                          RouteNames.board3,
+                          pathParameters: {
+                            'initialLife': selectedLife.toString()
+                          },
+                        );
                         break;
                       case 3:
                         if (selectedLayout == 0) {
-                          context.go('/board41');
+                          context.pushNamed(
+                            RouteNames.board41,
+                            pathParameters: {
+                              'initialLife': selectedLife.toString()
+                            },
+                          );
                         } else {
-                          context.go('/board42');
+                          context.pushNamed(
+                            RouteNames.board42,
+                            pathParameters: {
+                              'initialLife': selectedLife.toString()
+                            },
+                          );
                         }
                         break;
                       case 4:
                         if (selectedLayout == 0) {
-                          context.go('/board51');
+                          context.pushNamed(
+                            RouteNames.board51,
+                            pathParameters: {
+                              'initialLife': selectedLife.toString()
+                            },
+                          );
                         } else {
-                          context.go('/board52');
+                          context.pushNamed(
+                            RouteNames.board52,
+                            pathParameters: {
+                              'initialLife': selectedLife.toString()
+                            },
+                          );
                         }
                         break;
                       case 5:
                         if (selectedLayout == 0) {
-                          context.go('/board61');
+                          context.pushNamed(
+                            RouteNames.board61,
+                            pathParameters: {
+                              'initialLife': selectedLife.toString()
+                            },
+                          );
                         } else {
-                          context.go('/board62');
+                          context.goNamed(
+                            RouteNames.board62,
+                            pathParameters: {
+                              'initialLife': selectedLife.toString()
+                            },
+                          );
                         }
                         break;
                       default:
-                        context.go('/board1');
+                        context.push('/board1');
                     }
                   },
                   child: AppButtons(
@@ -172,9 +221,12 @@ class _SettingScreenState extends State<SettingScreen> {
         4,
         (index) => InkWell(
           onTap: () {
-            setState(() {
-              selectedLife = index;
-            });
+            setState(
+              () {
+                selectedLife = index;
+                // initialLife = selectedLife.toString();
+              },
+            );
           },
           child: Padding(
             padding: const EdgeInsets.all(0.0),

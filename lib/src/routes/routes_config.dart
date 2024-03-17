@@ -11,63 +11,112 @@ import 'package:lp_counter/src/screens/board_61_screen.dart';
 import 'package:lp_counter/src/screens/board_62_screen.dart';
 import 'package:lp_counter/src/screens/home_screen.dart';
 import 'package:lp_counter/src/screens/setting_screen.dart';
+import 'package:lp_counter/src/routes/routes_name.dart';
 
 final GoRouter appRouter = GoRouter(
+  initialLocation: '/',
   routes: <RouteBase>[
     GoRoute(
+      name: RouteNames.home,
       path: '/',
       builder: (BuildContext context, GoRouterState state) =>
           const HomeScreen(),
     ),
     GoRoute(
+      name: RouteNames.settings,
       path: '/settings',
       builder: (BuildContext context, GoRouterState state) =>
           const SettingScreen(),
     ),
     GoRoute(
-      path: '/board1',
-      builder: (BuildContext context, GoRouterState state) =>
-          const Board1Screen(),
+      name: RouteNames.board1,
+      path: '/board1/:initialLife',
+      builder: (BuildContext context, GoRouterState state) {
+        final int initialLife = int.parse(state.pathParameters['initialLife']!);
+        return Board1Screen(
+          initLife: initialLife,
+        );
+      },
     ),
     GoRoute(
-      path: '/board2',
-      builder: (BuildContext context, GoRouterState state) =>
-          const Board2Screen(),
+      name: RouteNames.board2,
+      path: '/board2/:initialLife',
+      builder: (BuildContext context, GoRouterState state) {
+        final int initialLife = int.parse(state.pathParameters['initialLife']!);
+        return Board2Screen(
+          initLife: initialLife,
+        );
+      },
     ),
     GoRoute(
-      path: '/board3',
-      builder: (BuildContext context, GoRouterState state) =>
-          const Board3Screen(),
+      name: RouteNames.board3,
+      path: '/board3/:initialLife',
+      builder: (BuildContext context, GoRouterState state) {
+        final int initialLife = int.parse(state.pathParameters['initialLife']!);
+        return Board3Screen(
+          initLife: initialLife,
+        );
+      },
     ),
     GoRoute(
-      path: '/board41',
-      builder: (BuildContext context, GoRouterState state) =>
-          const Board41Screen(),
+      name: RouteNames.board41,
+      path: '/board41/:initialLife',
+      builder: (BuildContext context, GoRouterState state) {
+        final int initialLife = int.parse(state.pathParameters['initialLife']!);
+        return Board41Screen(
+          initLife: initialLife,
+        );
+      },
     ),
     GoRoute(
-      path: '/board42',
-      builder: (BuildContext context, GoRouterState state) =>
-          const Board42Screen(),
+      name: RouteNames.board42,
+      path: '/board42/:initialLife',
+      builder: (BuildContext context, GoRouterState state) {
+        final int initialLife = int.parse(state.pathParameters['initialLife']!);
+        return Board42Screen(
+          initLife: initialLife,
+        );
+      },
     ),
     GoRoute(
-      path: '/board51',
-      builder: (BuildContext context, GoRouterState state) =>
-          const Board51Screen(),
+      name: RouteNames.board51,
+      path: '/board51/:initialLife',
+      builder: (BuildContext context, GoRouterState state) {
+        final int initialLife = int.parse(state.pathParameters['initialLife']!);
+        return Board51Screen(
+          initLife: initialLife,
+        );
+      },
     ),
     GoRoute(
-      path: '/board52',
-      builder: (BuildContext context, GoRouterState state) =>
-          const Board52Screen(),
+      name: RouteNames.board52,
+      path: '/board52/:initialLife',
+      builder: (BuildContext context, GoRouterState state) {
+        final int initialLife = int.parse(state.pathParameters['initialLife']!);
+        return Board52Screen(
+          initLife: initialLife,
+        );
+      },
     ),
     GoRoute(
-      path: '/board61',
-      builder: (BuildContext context, GoRouterState state) =>
-          const Board61Screen(),
+      name: RouteNames.board61,
+      path: '/board61/:initialLife',
+      builder: (BuildContext context, GoRouterState state) {
+        final int initialLife = int.parse(state.pathParameters['initialLife']!);
+        return Board61Screen(
+          initLife: initialLife,
+        );
+      },
     ),
     GoRoute(
-      path: '/board62',
-      builder: (BuildContext context, GoRouterState state) =>
-          const Board62Screen(),
+      name: RouteNames.board62,
+      path: '/board62/:initialLife',
+      builder: (BuildContext context, GoRouterState state) {
+        final int initialLife = int.parse(state.pathParameters['initialLife']!);
+        return Board62Screen(
+          initLife: initialLife,
+        );
+      },
     ),
   ],
 );

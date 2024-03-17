@@ -1,6 +1,5 @@
 class Player {
-  String name;
-  int life;
+  int lifePoints;
 
-  Player({required this.name, required this.life});
+  Player({required this.lifePoints});
 }

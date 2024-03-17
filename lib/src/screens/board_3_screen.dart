@@ -1,19 +1,41 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lp_counter/src/models/player.dart';
+import 'package:lp_counter/src/widgets/board_builders.dart';
 
 class Board3Screen extends StatefulWidget {
-  const Board3Screen({super.key});
+  final int initLife;
+  const Board3Screen({super.key, required this.initLife});
 
   @override
   State<Board3Screen> createState() => _Board3ScreenState();
 }
 
 class _Board3ScreenState extends State<Board3Screen> {
+  late List<Player> players;
+  static const List<int> startingLives = [20, 30, 40, 50];
+
+  int getStartingLife(int initLife) {
+    return initLife >= 0 && initLife < startingLives.length
+        ? startingLives[initLife]
+        : initLife;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    int startingLife = getStartingLife(widget.initLife);
+    players = List.generate(3, (index) => Player(lifePoints: startingLife));
+  }
+
+  void _updateLife(int playerIndex, int delta) {
+    setState(() {
+      players[playerIndex].lifePoints += delta;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -30,62 +52,62 @@ class _Board3ScreenState extends State<Board3Screen> {
           onPressed: () => context.go('/settings'),
         ),
       ),
-      body: Stack(
-        alignment: AlignmentDirectional.center,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 10,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: buildContainer(context),
-                      ),
-                      Expanded(
-                        child: buildContainer(context),
-                      ),
-                    ],
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return Stack(
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: RotatedBox(
+                            quarterTurns: 1,
+                            child: buildPlayerRow(0, _updateLife, players),
+                          ),
+                        ),
+                        Expanded(
+                          child: RotatedBox(
+                            quarterTurns: 3,
+                            child: buildPlayerRow(1, _updateLife, players),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: RotatedBox(
+                      quarterTurns: 0,
+                      child: buildPlayerRow(2, _updateLife, players),
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                top: constraints.maxHeight * (2 / 3) -
+                    23, // Positionieren Sie das Icon abhängig von der Höhe der Container
+                left: constraints.maxWidth * 0.5 -
+                    23, // Positionieren Sie das Icon in der Mitte
+                child: Container(
+                  height: 46,
+                  width: 46,
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    color: Colors.white70,
+                    icon: const Icon(Icons.menu),
+                    onPressed: () {},
                   ),
                 ),
-                Expanded(
-                  flex: 5,
-                  child: buildContainer(context),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: height * 0.6,
-            bottom: height * 0.3,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.black,
-                shape: BoxShape.circle,
               ),
-              child: IconButton(
-                color: Colors.white70,
-                // iconSize: 60,
-                icon: const Icon(Icons.menu),
-                onPressed: () {},
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildContainer(context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.circular(4),
-        ),
+            ],
+          );
+        },
       ),
     );
   }

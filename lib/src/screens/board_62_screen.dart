@@ -1,14 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lp_counter/src/models/player.dart';
+import 'package:lp_counter/src/widgets/board_builders.dart';
 
 class Board62Screen extends StatefulWidget {
-  const Board62Screen({super.key});
+  final int initLife;
+  const Board62Screen({super.key, required this.initLife});
 
   @override
   State<Board62Screen> createState() => _Board62ScreenState();
 }
 
 class _Board62ScreenState extends State<Board62Screen> {
+  late List<Player> players;
+  static const List<int> startingLives = [20, 30, 40, 50];
+
+  int getStartingLife(int initLife) {
+    return initLife >= 0 && initLife < startingLives.length
+        ? startingLives[initLife]
+        : initLife;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    int startingLife = getStartingLife(widget.initLife);
+    players = List.generate(6, (index) => Player(lifePoints: startingLife));
+  }
+
+  void _updateLife(int playerIndex, int delta) {
+    setState(() {
+      players[playerIndex].lifePoints += delta;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,54 +52,83 @@ class _Board62ScreenState extends State<Board62Screen> {
           onPressed: () => context.go('/settings'),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: buildContainer(context),
-            ),
-            Expanded(
-              child: Row(
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return Stack(
+            children: <Widget>[
+              Column(
                 children: [
                   Expanded(
-                    child: buildContainer(context),
+                    flex: 8,
+                    child: RotatedBox(
+                      quarterTurns: 2,
+                      child: buildPlayerRow(0, _updateLife, players),
+                    ),
                   ),
                   Expanded(
-                    child: buildContainer(context),
+                    flex: 10,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: RotatedBox(
+                            quarterTurns: 1,
+                            child: buildPlayerRow(1, _updateLife, players),
+                          ),
+                        ),
+                        Expanded(
+                          child: RotatedBox(
+                            quarterTurns: 3,
+                            child: buildPlayerRow(2, _updateLife, players),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 10,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: RotatedBox(
+                            quarterTurns: 1,
+                            child: buildPlayerRow(3, _updateLife, players),
+                          ),
+                        ),
+                        Expanded(
+                          child: RotatedBox(
+                            quarterTurns: 3,
+                            child: buildPlayerRow(4, _updateLife, players),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: buildPlayerRow(5, _updateLife, players),
                   ),
                 ],
               ),
-            ),
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: buildContainer(context),
+              Positioned(
+                top: constraints.maxHeight * 0.5 - 23,
+                left: constraints.maxWidth * 0.5 - 23,
+                child: Container(
+                  height: 46,
+                  width: 46,
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle,
                   ),
-                  Expanded(
-                    child: buildContainer(context),
+                  child: IconButton(
+                    color: Colors.white70,
+                    icon: const Icon(Icons.menu),
+                    onPressed: () {},
                   ),
-                ],
+                ),
               ),
-            ),
-            Expanded(
-              child: buildContainer(context),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildContainer(context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.circular(4),
-        ),
+            ],
+          );
+        },
       ),
     );
   }
