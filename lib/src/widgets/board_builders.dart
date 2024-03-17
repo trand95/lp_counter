@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:lp_counter/src/models/player.dart';
 
+// Definieren Sie eine Liste von Farben, die Sie den Spielern zuweisen möchten
+List<Color> playerColors = [
+  Colors.red,
+  Colors.blue,
+  Colors.green,
+  Colors.yellow,
+  Colors.orange,
+  Colors.purple,
+];
+
 Widget buildPlayerRow(
     int playerIndex, Function(int, int) updateLife, List<Player> players) {
   return Stack(
     alignment: AlignmentDirectional.center,
     children: <Widget>[
-      buildContainer(playerIndex, updateLife),
+      buildContainer(playerIndex, updateLife, playerColors[playerIndex]),
       buildLifePointsText(playerIndex, players),
     ],
   );
 }
 
-Widget buildContainer(int playerIndex, Function(int, int) updateLife) {
+Widget buildContainer(
+    int playerIndex, Function(int, int) updateLife, Color color) {
   return Padding(
     padding: const EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
     child: Row(
@@ -22,6 +33,7 @@ Widget buildContainer(int playerIndex, Function(int, int) updateLife) {
               playerIndex,
               -1,
               updateLife,
+              color,
               const BorderRadius.only(
                 topLeft: Radius.circular(4),
                 bottomLeft: Radius.circular(4),
@@ -32,6 +44,7 @@ Widget buildContainer(int playerIndex, Function(int, int) updateLife) {
               playerIndex,
               1,
               updateLife,
+              color,
               const BorderRadius.only(
                 topRight: Radius.circular(4),
                 bottomRight: Radius.circular(4),
@@ -43,13 +56,13 @@ Widget buildContainer(int playerIndex, Function(int, int) updateLife) {
 }
 
 Widget buildInkWell(int playerIndex, int delta, Function(int, int) updateLife,
-    BorderRadius borderRadius) {
+    Color color, BorderRadius borderRadius) {
   return InkWell(
     splashColor: Colors.transparent,
     onTap: () => updateLife(playerIndex, delta),
     child: Ink(
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: color, // Verwenden Sie die übergebene Farbe
         borderRadius: borderRadius,
       ),
     ),
