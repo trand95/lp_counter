@@ -94,7 +94,7 @@ class _Board42ScreenState extends State<Board42Screen> {
                 ],
               ),
               Positioned(
-                top: constraints.maxHeight * 0.5 -
+                top: constraints.maxHeight * (8 / 11) -
                     23, // Positionieren Sie das Icon abhängig von der Höhe der Container
                 left: constraints.maxWidth * 0.5 -
                     23, // Positionieren Sie das Icon in der Mitte

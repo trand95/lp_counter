@@ -87,10 +87,8 @@ class _Board3ScreenState extends State<Board3Screen> {
                 ],
               ),
               Positioned(
-                top: constraints.maxHeight * (2 / 3) -
-                    23, // Positionieren Sie das Icon abhängig von der Höhe der Container
-                left: constraints.maxWidth * 0.5 -
-                    23, // Positionieren Sie das Icon in der Mitte
+                top: constraints.maxHeight * (2 / 3) - 23,
+                left: constraints.maxWidth * 0.5 - 23,
                 child: Container(
                   height: 46,
                   width: 46,

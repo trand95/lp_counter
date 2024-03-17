@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lp_counter/src/models/player.dart';
+import 'package:stroke_text/stroke_text.dart';
 
 // Definieren Sie eine Liste von Farben, die Sie den Spielern zuweisen möchten
 List<Color> playerColors = [
@@ -30,25 +31,27 @@ Widget buildContainer(
       children: [
         Expanded(
           child: buildInkWell(
-              playerIndex,
-              -1,
-              updateLife,
-              color,
-              const BorderRadius.only(
-                topLeft: Radius.circular(4),
-                bottomLeft: Radius.circular(4),
-              )),
+            playerIndex,
+            -1,
+            updateLife,
+            color,
+            const BorderRadius.only(
+              topLeft: Radius.circular(4),
+              bottomLeft: Radius.circular(4),
+            ),
+          ),
         ),
         Expanded(
           child: buildInkWell(
-              playerIndex,
-              1,
-              updateLife,
-              color,
-              const BorderRadius.only(
-                topRight: Radius.circular(4),
-                bottomRight: Radius.circular(4),
-              )),
+            playerIndex,
+            1,
+            updateLife,
+            color,
+            const BorderRadius.only(
+              topRight: Radius.circular(4),
+              bottomRight: Radius.circular(4),
+            ),
+          ),
         ),
       ],
     ),
@@ -62,7 +65,7 @@ Widget buildInkWell(int playerIndex, int delta, Function(int, int) updateLife,
     onTap: () => updateLife(playerIndex, delta),
     child: Ink(
       decoration: BoxDecoration(
-        color: color, // Verwenden Sie die übergebene Farbe
+        color: color,
         borderRadius: borderRadius,
       ),
     ),
@@ -70,8 +73,11 @@ Widget buildInkWell(int playerIndex, int delta, Function(int, int) updateLife,
 }
 
 Widget buildLifePointsText(int playerIndex, List<Player> players) {
-  return Text(
-    '${players[playerIndex].lifePoints}',
-    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+  return StrokeText(
+    text: '${players[playerIndex].lifePoints}',
+    textStyle: const TextStyle(
+        color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
+    strokeColor: Colors.black,
+    strokeWidth: 2,
   );
 }

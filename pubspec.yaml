@@ -39,7 +39,7 @@ dependencies:
   gap: ^3.0.1
   wakelock: ^0.6.2
   go_router: ^13.2.0
-  url_strategy:
+  stroke_text: any
 
 dev_dependencies:
   flutter_test:
