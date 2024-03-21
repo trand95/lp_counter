@@ -1,39 +1,66 @@
 import 'package:flutter/material.dart';
 
 class MenuDialog {
-  static void show(BuildContext context, List<String> playerNames,
-      ValueChanged<int> onPlayerCountChanged) {
-    TextEditingController playerNameController = TextEditingController();
-
+  static void show(
+      BuildContext context, void Function(int) onMenuItemSelected) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Einstellungen'),
+        return Dialog(
           backgroundColor: Colors.transparent,
-          content: Container(
+          child: Container(
             color: Colors.transparent,
             child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                TextField(
-                  controller: playerNameController,
-                  decoration: InputDecoration(labelText: 'Spielername'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (playerNameController.text.isNotEmpty) {
-                      playerNames.add(playerNameController.text);
-                      playerNameController.clear();
-                      onPlayerCountChanged(playerNames.length);
-                    }
-                  },
-                  child: Text('Spieler hinzufügen'),
-                ),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Fertig'),
+                  child: const Text('Fertig'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    onMenuItemSelected(0);
+                    Navigator.pop(context); // Schließt den Dialog
+                  },
+                  child: const Text('Button 1'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    onMenuItemSelected(1);
+                    Navigator.pop(context); // Schließt den Dialog
+                  },
+                  child: const Text('Button 2'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    onMenuItemSelected(2);
+                    Navigator.pop(context); // Schließt den Dialog
+                  },
+                  child: const Text('Button 3'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    onMenuItemSelected(3);
+                    Navigator.pop(context); // Schließt den Dialog
+                  },
+                  child: const Text('Button 4'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    onMenuItemSelected(4);
+                    Navigator.pop(context); // Schließt den Dialog
+                  },
+                  child: const Text('Button 5'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    onMenuItemSelected(5);
+                    Navigator.pop(context); // Schließt den Dialog
+                  },
+                  child: const Text('Button 6'),
                 ),
               ],
             ),

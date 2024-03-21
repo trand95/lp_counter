@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lp_counter/src/models/player.dart';
 import 'package:lp_counter/src/widgets/board_builders.dart';
+import 'package:lp_counter/src/dialogs/menu_dialog.dart';
 
 class Board1Screen extends StatefulWidget {
   final int initLife;
@@ -17,7 +18,10 @@ class _Board1ScreenState extends State<Board1Screen> {
   late List<Player> players;
   static const List<int> startingLives = [20, 30, 40, 50];
   bool showDeltaText = false;
+  bool showCurrentLifeText = false;
+  int currentLife = 0;
   int delta = 0;
+  late int _lastUpdateId = 0;
 
   int getStartingLife(int initLife) {
     return initLife >= 0 && initLife < startingLives.length
@@ -33,24 +37,28 @@ class _Board1ScreenState extends State<Board1Screen> {
   }
 
   void _updateLife(int playerIndex, int delta) {
-    setState(
-      () {
-        players[playerIndex].lifePoints += delta;
-        this.delta += delta; // Summieren Sie den Delta-Wert
-        showDeltaText = true; // Text anzeigen
-      },
-    );
+    final updateId = ++_lastUpdateId;
+    setState(() {
+      if (showCurrentLifeText == false) {
+        currentLife = players[playerIndex].lifePoints;
+      }
+      players[playerIndex].lifePoints += delta;
+      this.delta += delta;
+      showDeltaText = true;
+      showCurrentLifeText = true;
+    });
 
     Future.delayed(
       const Duration(seconds: 4),
       () {
-        setState(
-          () {
+        if (_lastUpdateId == updateId) {
+          setState(() {
             this.delta = 0;
-            showDeltaText = false; // Text ausblenden
-            // Delta-Wert zurücksetzen
-          },
-        );
+            showDeltaText = false;
+            showCurrentLifeText = false;
+            _lastUpdateId = 0;
+          });
+        }
       },
     );
   }
@@ -92,7 +100,26 @@ class _Board1ScreenState extends State<Board1Screen> {
                     color: Colors.white70,
                     iconSize: 30,
                     icon: const Icon(Icons.menu),
-                    onPressed: () {},
+                    onPressed: () {
+                      MenuDialog.show(context, (int selectedItemIndex) {});
+                    },
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 20,
+                right: 20,
+                child: AnimatedOpacity(
+                  opacity: showDeltaText ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 0),
+                  child: Text(
+                    '$currentLife',
+                    style: const TextStyle(
+                      fontFamily: 'Arial',
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -101,11 +128,12 @@ class _Board1ScreenState extends State<Board1Screen> {
                 left: constraints.maxWidth * 0.5 - 10,
                 child: AnimatedOpacity(
                   opacity: showDeltaText ? 1.0 : 0.0,
-                  duration: const Duration(milliseconds: 1000),
+                  duration: const Duration(milliseconds: 0),
                   child: Text(
                     delta > 0 ? '+$delta' : '$delta',
-                    style: TextStyle(
-                      color: delta > 0 ? Colors.green : Colors.black,
+                    style: const TextStyle(
+                      fontFamily: 'Arial',
+                      color: Colors.white,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),

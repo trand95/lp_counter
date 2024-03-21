@@ -63,11 +63,15 @@ Widget buildInkWell(int playerIndex, int delta, Function(int, int) updateLife,
   return InkWell(
     splashColor: Colors.transparent,
     onTap: () => updateLife(playerIndex, delta),
+    onLongPress: () => updateLife(playerIndex, delta),
     child: Ink(
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: borderRadius,
-      ),
+          color: color,
+          borderRadius: borderRadius,
+          border: Border.all(
+            color: color,
+            width: 0.0,
+          )),
     ),
   );
 }
@@ -76,7 +80,10 @@ Widget buildLifePointsText(int playerIndex, List<Player> players) {
   return StrokeText(
     text: '${players[playerIndex].lifePoints}',
     textStyle: const TextStyle(
-        color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
+        fontFamily: 'Arial',
+        color: Colors.white,
+        fontSize: 40,
+        fontWeight: FontWeight.bold),
     strokeColor: Colors.black,
     strokeWidth: 2,
   );
