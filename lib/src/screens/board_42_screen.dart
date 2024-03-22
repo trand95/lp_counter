@@ -14,6 +14,12 @@ class Board42Screen extends StatefulWidget {
 class _Board42ScreenState extends State<Board42Screen> {
   late List<Player> players;
   static const List<int> startingLives = [20, 30, 40, 50];
+  bool showDeltaText = false;
+  bool showCurrentLifeText = false;
+  int currentLife = 0;
+  int delta = 0;
+  late int _lastUpdateId = 0;
+
 
   int getStartingLife(int initLife) {
     return initLife >= 0 && initLife < startingLives.length
@@ -29,9 +35,30 @@ class _Board42ScreenState extends State<Board42Screen> {
   }
 
   void _updateLife(int playerIndex, int delta) {
+    final int updateId = ++players[playerIndex].lastUpdateId;
     setState(() {
+      if (players[playerIndex].showCurrentLifeText == false) {
+        players[playerIndex].currentLife = players[playerIndex].lifePoints;
+      }
       players[playerIndex].lifePoints += delta;
+      players[playerIndex].delta += delta;
+      players[playerIndex].showDeltaText = true;
+      players[playerIndex].showCurrentLifeText = true;
     });
+
+    Future.delayed(
+      const Duration(seconds: 4),
+      () {
+        if (players[playerIndex].lastUpdateId == updateId) {
+          setState(() {
+            players[playerIndex].delta = 0;
+            players[playerIndex].showDeltaText = false;
+            players[playerIndex].showCurrentLifeText = false;
+            players[playerIndex].lastUpdateId = 0;
+          });
+        }
+      },
+    );
   }
 
   @override
@@ -62,7 +89,7 @@ class _Board42ScreenState extends State<Board42Screen> {
                     flex: 6,
                     child: RotatedBox(
                       quarterTurns: 2,
-                      child: buildPlayerRow(0, _updateLife, players),
+                      child: buildPlayerRow(0, _updateLife, players, constraints),
                     ),
                   ),
                   Expanded(
@@ -72,13 +99,13 @@ class _Board42ScreenState extends State<Board42Screen> {
                         Expanded(
                           child: RotatedBox(
                             quarterTurns: 1,
-                            child: buildPlayerRow(1, _updateLife, players),
+                            child: buildPlayerRow(1, _updateLife, players, constraints),
                           ),
                         ),
                         Expanded(
                           child: RotatedBox(
                             quarterTurns: 3,
-                            child: buildPlayerRow(2, _updateLife, players),
+                            child: buildPlayerRow(2, _updateLife, players, constraints),
                           ),
                         ),
                       ],
@@ -88,7 +115,7 @@ class _Board42ScreenState extends State<Board42Screen> {
                     flex: 6,
                     child: RotatedBox(
                       quarterTurns: 0,
-                      child: buildPlayerRow(3, _updateLife, players),
+                      child: buildPlayerRow(3, _updateLife, players, constraints),
                     ),
                   ),
                 ],

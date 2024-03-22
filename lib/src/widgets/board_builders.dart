@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lp_counter/src/models/player.dart';
 import 'package:stroke_text/stroke_text.dart';
 
-// Definieren Sie eine Liste von Farben, die Sie den Spielern zuweisen möchten
 List<Color> playerColors = [
   Colors.red,
   Colors.blue,
@@ -13,49 +12,106 @@ List<Color> playerColors = [
 ];
 
 Widget buildPlayerRow(
-    int playerIndex, Function(int, int) updateLife, List<Player> players) {
+    int playerIndex,
+    Function(int, int) updateLife,
+    List<Player> players,
+    
+    constraints,
+    ) {
   return Stack(
     alignment: AlignmentDirectional.center,
     children: <Widget>[
-      buildContainer(playerIndex, updateLife, playerColors[playerIndex]),
-      buildLifePointsText(playerIndex, players),
+      buildContainer(playerIndex, updateLife, playerColors[playerIndex],
+           constraints),
+
+        Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildDeltaText(constraints, players[playerIndex].showDeltaText, players[playerIndex].delta),
+              buildLifePointsText(players[playerIndex].lifePoints),
+              buildCurrentLifeText(constraints, players[playerIndex].showCurrentLifeText, players[playerIndex].currentLife),
+            ],
+          ),
+     
+    
+      
     ],
   );
 }
 
 Widget buildContainer(
-    int playerIndex, Function(int, int) updateLife, Color color) {
+    int playerIndex,
+    Function(int, int) updateLife,
+    Color color,
+    
+    constraints,
+    ) {
   return Padding(
     padding: const EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
-    child: Row(
-      children: [
-        Expanded(
-          child: buildInkWell(
-            playerIndex,
-            -1,
-            updateLife,
-            color,
-            const BorderRadius.only(
-              topLeft: Radius.circular(4),
-              bottomLeft: Radius.circular(4),
+    child: Stack(children: <Widget>[
+      Row(
+        children: [
+          Expanded(
+            child: buildInkWell(
+              playerIndex,
+              -1,
+              updateLife,
+              color,
+              const BorderRadius.only(
+                topLeft: Radius.circular(4),
+                bottomLeft: Radius.circular(4),
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: buildInkWell(
-            playerIndex,
-            1,
-            updateLife,
-            color,
-            const BorderRadius.only(
-              topRight: Radius.circular(4),
-              bottomRight: Radius.circular(4),
+          Expanded(
+            child: buildInkWell(
+              playerIndex,
+              1,
+              updateLife,
+              color,
+              const BorderRadius.only(
+                topRight: Radius.circular(4),
+                bottomRight: Radius.circular(4),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
+    ]),
+  );
+}
+
+Widget buildDeltaText(constraints, showDeltaText, int delta) {
+  return AnimatedOpacity(
+    opacity: showDeltaText ? 1.0 : 0.0,
+    duration: const Duration(milliseconds: 0),
+    child: Text(
+      delta > 0 ? '+$delta' : '$delta',
+      style: const TextStyle(
+        fontFamily: 'Arial',
+        color: Colors.white,
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+      ),
     ),
   );
+}
+
+Widget buildCurrentLifeText(constraints, showCurrentLifeText, int currentLife) {
+  return AnimatedOpacity(
+      opacity: showCurrentLifeText ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 0),
+      child: Text(
+        '$currentLife',
+        style: const TextStyle(
+          fontFamily: 'Arial',
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+
 }
 
 Widget buildInkWell(int playerIndex, int delta, Function(int, int) updateLife,
@@ -63,8 +119,7 @@ Widget buildInkWell(int playerIndex, int delta, Function(int, int) updateLife,
   return InkWell(
     splashColor: Colors.transparent,
     onTap: () => updateLife(playerIndex, delta),
-    onLongPress: () => updateLife(playerIndex, delta),
-    child: Ink(
+      child: Ink(
       decoration: BoxDecoration(
           color: color,
           borderRadius: borderRadius,
@@ -76,9 +131,9 @@ Widget buildInkWell(int playerIndex, int delta, Function(int, int) updateLife,
   );
 }
 
-Widget buildLifePointsText(int playerIndex, List<Player> players) {
+Widget buildLifePointsText(int lifePoints) {
   return StrokeText(
-    text: '${players[playerIndex].lifePoints}',
+    text: '$lifePoints',
     textStyle: const TextStyle(
         fontFamily: 'Arial',
         color: Colors.white,

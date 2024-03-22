@@ -37,32 +37,32 @@ class _Board1ScreenState extends State<Board1Screen> {
   }
 
   void _updateLife(int playerIndex, int delta) {
-    final updateId = ++_lastUpdateId;
+    final int updateId = ++players[playerIndex].lastUpdateId;
     setState(() {
-      if (showCurrentLifeText == false) {
-        currentLife = players[playerIndex].lifePoints;
+      if (players[playerIndex].showCurrentLifeText == false) {
+        players[playerIndex].currentLife = players[playerIndex].lifePoints;
       }
       players[playerIndex].lifePoints += delta;
-      this.delta += delta;
-      showDeltaText = true;
-      showCurrentLifeText = true;
+      players[playerIndex].delta += delta;
+      players[playerIndex].showDeltaText = true;
+      players[playerIndex].showCurrentLifeText = true;
     });
 
     Future.delayed(
       const Duration(seconds: 4),
       () {
-        if (_lastUpdateId == updateId) {
+        if (players[playerIndex].lastUpdateId == updateId) {
           setState(() {
-            this.delta = 0;
-            showDeltaText = false;
-            showCurrentLifeText = false;
-            _lastUpdateId = 0;
+            players[playerIndex].delta = 0;
+            players[playerIndex].showDeltaText = false;
+            players[playerIndex].showCurrentLifeText = false;
+            players[playerIndex].lastUpdateId = 0;
           });
         }
       },
     );
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +87,7 @@ class _Board1ScreenState extends State<Board1Screen> {
             children: <Widget>[
               RotatedBox(
                 quarterTurns: 0,
-                child: buildPlayerRow(0, _updateLife, players),
+                child: buildPlayerRow(0, _updateLife, players, constraints),
               ),
               Align(
                 alignment: Alignment.topLeft,
@@ -106,40 +106,32 @@ class _Board1ScreenState extends State<Board1Screen> {
                   ),
                 ),
               ),
-              Positioned(
+            /*  Positioned(
                 top: 20,
                 right: 20,
-                child: AnimatedOpacity(
-                  opacity: showDeltaText ? 1.0 : 0.0,
-                  duration: const Duration(milliseconds: 0),
-                  child: Text(
-                    '$currentLife',
-                    style: const TextStyle(
-                      fontFamily: 'Arial',
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                child: Text(
+                  '$currentLife',
+                  style: const TextStyle(
+                    fontFamily: 'Arial',
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Positioned(
                 top: 200,
                 left: constraints.maxWidth * 0.5 - 10,
-                child: AnimatedOpacity(
-                  opacity: showDeltaText ? 1.0 : 0.0,
-                  duration: const Duration(milliseconds: 0),
-                  child: Text(
-                    delta > 0 ? '+$delta' : '$delta',
-                    style: const TextStyle(
-                      fontFamily: 'Arial',
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                child: Text(
+                  delta > 0 ? '+$delta' : '$delta',
+                  style: const TextStyle(
+                    fontFamily: 'Arial',
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
+              ),*/
             ],
           );
         },

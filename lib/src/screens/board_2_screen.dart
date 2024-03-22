@@ -29,9 +29,30 @@ class _Board2ScreenState extends State<Board2Screen> {
   }
 
   void _updateLife(int playerIndex, int delta) {
+    final int updateId = ++players[playerIndex].lastUpdateId;
     setState(() {
+      if (players[playerIndex].showCurrentLifeText == false) {
+        players[playerIndex].currentLife = players[playerIndex].lifePoints;
+      }
       players[playerIndex].lifePoints += delta;
+      players[playerIndex].delta += delta;
+      players[playerIndex].showDeltaText = true;
+      players[playerIndex].showCurrentLifeText = true;
     });
+
+    Future.delayed(
+      const Duration(seconds: 4),
+      () {
+        if (players[playerIndex].lastUpdateId == updateId) {
+          setState(() {
+            players[playerIndex].delta = 0;
+            players[playerIndex].showDeltaText = false;
+            players[playerIndex].showCurrentLifeText = false;
+            players[playerIndex].lastUpdateId = 0;
+          });
+        }
+      },
+    );
   }
 
   @override
@@ -52,42 +73,48 @@ class _Board2ScreenState extends State<Board2Screen> {
           onPressed: () => context.go('/settings'),
         ),
       ),
-      body: Stack(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: RotatedBox(
-                    quarterTurns: 2,
-                    child: buildPlayerRow(0, _updateLife, players),
+      body: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return Stack(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: RotatedBox(
+                        quarterTurns: 2,
+                        child: buildPlayerRow(
+                            0, _updateLife, players, constraints),
+                      ),
+                    ),
+                    Expanded(
+                      child: RotatedBox(
+                        quarterTurns: 0,
+                        child: buildPlayerRow(
+                            1, _updateLife, players, constraints),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    color: Colors.white70,
+                    // iconSize: 30,
+                    icon: const Icon(Icons.menu),
+                    onPressed: () {},
                   ),
                 ),
-                Expanded(
-                  child: RotatedBox(
-                    quarterTurns: 0,
-                    child: buildPlayerRow(1, _updateLife, players),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Align(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.black,
-                shape: BoxShape.circle,
               ),
-              child: IconButton(
-                color: Colors.white70,
-                // iconSize: 30,
-                icon: const Icon(Icons.menu),
-                onPressed: () {},
-              ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
