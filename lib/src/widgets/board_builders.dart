@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:lp_counter/src/models/player.dart';
-import 'package:stroke_text/stroke_text.dart';
 
 List<Color> playerColors = [
   Colors.red,
@@ -12,40 +12,40 @@ List<Color> playerColors = [
 ];
 
 Widget buildPlayerRow(
-    int playerIndex,
-    Function(int, int) updateLife,
-    List<Player> players,
-    
-    constraints,
-    ) {
+  int playerIndex,
+  Function(int, int) updateLife,
+  List<Player> players,
+  constraints,
+) {
   return Stack(
     alignment: AlignmentDirectional.center,
     children: <Widget>[
-      buildContainer(playerIndex, updateLife, playerColors[playerIndex],
-           constraints),
-
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildDeltaText(constraints, players[playerIndex].showDeltaText, players[playerIndex].delta),
-              buildLifePointsText(players[playerIndex].lifePoints),
-              buildCurrentLifeText(constraints, players[playerIndex].showCurrentLifeText, players[playerIndex].currentLife),
-            ],
-          ),
-     
-    
-      
+      buildContainer(
+          playerIndex, updateLife, playerColors[playerIndex], constraints),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          buildDeltaText(constraints, players[playerIndex].showDeltaText,
+              players[playerIndex].delta),
+          const Gap(10),
+          buildLifePointsText(players[playerIndex].lifePoints),
+          const Gap(10),
+          buildCurrentLifeText(
+              constraints,
+              players[playerIndex].showCurrentLifeText,
+              players[playerIndex].currentLife),
+        ],
+      ),
     ],
   );
 }
 
 Widget buildContainer(
-    int playerIndex,
-    Function(int, int) updateLife,
-    Color color,
-    
-    constraints,
-    ) {
+  int playerIndex,
+  Function(int, int) updateLife,
+  Color color,
+  constraints,
+) {
   return Padding(
     padding: const EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
     child: Stack(children: <Widget>[
@@ -88,9 +88,9 @@ Widget buildDeltaText(constraints, showDeltaText, int delta) {
     child: Text(
       delta > 0 ? '+$delta' : '$delta',
       style: const TextStyle(
-        fontFamily: 'Arial',
+        // fontFamily: 'Arial',
         color: Colors.white,
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
     ),
@@ -99,27 +99,27 @@ Widget buildDeltaText(constraints, showDeltaText, int delta) {
 
 Widget buildCurrentLifeText(constraints, showCurrentLifeText, int currentLife) {
   return AnimatedOpacity(
-      opacity: showCurrentLifeText ? 1.0 : 0.0,
-      duration: const Duration(milliseconds: 0),
-      child: Text(
-        '$currentLife',
-        style: const TextStyle(
-          fontFamily: 'Arial',
-          color: Colors.white,
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        ),
+    opacity: showCurrentLifeText ? 1.0 : 0.0,
+    duration: const Duration(milliseconds: 0),
+    child: Text(
+      '$currentLife',
+      style: const TextStyle(
+        //fontFamily: 'Arial',
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
       ),
-    );
-
+    ),
+  );
 }
 
 Widget buildInkWell(int playerIndex, int delta, Function(int, int) updateLife,
     Color color, BorderRadius borderRadius) {
   return InkWell(
     splashColor: Colors.transparent,
+    highlightColor: Colors.black.withOpacity(0.15),
     onTap: () => updateLife(playerIndex, delta),
-      child: Ink(
+    child: Ink(
       decoration: BoxDecoration(
           color: color,
           borderRadius: borderRadius,
@@ -132,14 +132,12 @@ Widget buildInkWell(int playerIndex, int delta, Function(int, int) updateLife,
 }
 
 Widget buildLifePointsText(int lifePoints) {
-  return StrokeText(
-    text: '$lifePoints',
-    textStyle: const TextStyle(
-        fontFamily: 'Arial',
+  return Text(
+    '$lifePoints',
+    style: const TextStyle(
+        //fontFamily: 'Arial',
         color: Colors.white,
         fontSize: 40,
         fontWeight: FontWeight.bold),
-    strokeColor: Colors.black,
-    strokeWidth: 2,
   );
 }

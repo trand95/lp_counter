@@ -16,7 +16,7 @@ class MagicLifeCounter extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Roboto'),
+      theme: ThemeData(fontFamily: 'Tauri'),
     );
   }
 }

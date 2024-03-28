@@ -34,7 +34,7 @@ class Layout41 extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(color: borderColor, width: 3),
           borderRadius: BorderRadius.circular(4),
-          color: Colors.black),
+          color: Colors.transparent),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

@@ -17,11 +17,6 @@ class Board1Screen extends StatefulWidget {
 class _Board1ScreenState extends State<Board1Screen> {
   late List<Player> players;
   static const List<int> startingLives = [20, 30, 40, 50];
-  bool showDeltaText = false;
-  bool showCurrentLifeText = false;
-  int currentLife = 0;
-  int delta = 0;
-  late int _lastUpdateId = 0;
 
   int getStartingLife(int initLife) {
     return initLife >= 0 && initLife < startingLives.length
@@ -62,7 +57,7 @@ class _Board1ScreenState extends State<Board1Screen> {
       },
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +101,7 @@ class _Board1ScreenState extends State<Board1Screen> {
                   ),
                 ),
               ),
-            /*  Positioned(
+              /*  Positioned(
                 top: 20,
                 right: 20,
                 child: Text(

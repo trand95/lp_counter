@@ -14,11 +14,6 @@ class Board3Screen extends StatefulWidget {
 class _Board3ScreenState extends State<Board3Screen> {
   late List<Player> players;
   static const List<int> startingLives = [20, 30, 40, 50];
-  bool showDeltaText = false;
-  bool showCurrentLifeText = false;
-  int currentLife = 0;
-  int delta = 0;
-  late int _lastUpdateId = 0;
 
   int getStartingLife(int initLife) {
     return initLife >= 0 && initLife < startingLives.length

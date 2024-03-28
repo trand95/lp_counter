@@ -7,3 +7,9 @@ Color orange = const Color(0xffFF815E);
 Color white = const Color(0xffffffff);
 Color purple = const Color(0xff613FE5);
 Color softpurple = const Color(0xffD0C3FF);
+
+LinearGradient gradient = const LinearGradient(
+  colors: [Colors.yellow, Colors.deepOrange],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);

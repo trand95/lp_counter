@@ -17,14 +17,14 @@ class Layout52 extends StatelessWidget {
     );
   }
 
-    Column buildColumn() {
+  Column buildColumn() {
     return Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            buildContainer(height),
-            buildContainer(height),
-          ],
-        );
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        buildContainer(height),
+        buildContainer(height),
+      ],
+    );
   }
 
   @override
@@ -35,7 +35,7 @@ class Layout52 extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(color: borderColor, width: 3),
           borderRadius: BorderRadius.circular(4),
-          color: Colors.black),
+          color: Colors.transparent),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -46,6 +46,4 @@ class Layout52 extends StatelessWidget {
       ),
     );
   }
-
-
 }
