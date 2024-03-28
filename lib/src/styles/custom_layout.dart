@@ -42,7 +42,7 @@ class CustomLayout extends StatelessWidget {
         }
         break;
       default:
-        return Container(); // Handle default case or return a default widget
+        return Container();
     }
     return Container();
   }

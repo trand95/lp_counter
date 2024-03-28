@@ -89,10 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),*/
                   const Gap(80),
-                  const GlowingButton(
-                    color1: Colors.deepOrange,
-                    color2: Colors.yellow,
-                  ),
+                  const GlowingButton(),
                   /*ElevatedButton(
                     onPressed: () {
                       context.goNamed(RouteNames.settings);

@@ -5,13 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:lp_counter/src/routes/routes_name.dart';
 
 class GlowingButton extends StatefulWidget {
-  final Color color1;
-  final Color color2;
-
-  const GlowingButton(
-      {super.key,
-      this.color1 = Colors.yellow,
-      this.color2 = Colors.deepOrange});
+  const GlowingButton({
+    super.key,
+  });
 
   @override
   State<GlowingButton> createState() => _GlowingButtonState();

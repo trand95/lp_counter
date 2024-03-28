@@ -29,11 +29,6 @@ class _SettingScreenState extends State<SettingScreen> {
       appBar: AppBar(
         toolbarHeight: 33,
         backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: const Text(
-          'Settings',
-          style: TextStyle(color: Colors.white54),
-        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.white,
@@ -85,10 +80,6 @@ class _SettingScreenState extends State<SettingScreen> {
                           fontWeight: FontWeight.bold)),
                   const Gap(20),
                   _lifeSection(),
-                  const Gap(20),
-                  SizedBox(
-                    width: double.infinity,
-                  ),
                   const Gap(50),
                   InkWell(
                     onTap: () {
@@ -183,6 +174,9 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ),
                   const Gap(50),
+                  const SizedBox(
+                    width: double.infinity,
+                  ),
                 ],
               ),
             ),
@@ -214,7 +208,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ? Colors.deepOrange
                   : Colors.transparent,
               textColor: Colors.white,
-              backgroundColor: Color.fromARGB(255, 49, 48, 48),
+              backgroundColor: const Color.fromARGB(255, 49, 48, 48),
               text: (index + 1).toString()),
         ),
       ),
@@ -263,15 +257,15 @@ class _SettingScreenState extends State<SettingScreen> {
           child: Padding(
             padding: const EdgeInsets.all(0.0),
             child: AppButtons(
-              height: 100,
-              width: 170,
+              height: 90,
+              width: 150,
               color1:
                   selectedLife == index ? Colors.yellow : Colors.transparent,
               color2: selectedLife == index
                   ? Colors.deepOrange
                   : Colors.transparent,
               textColor: Colors.white,
-              backgroundColor: const Color.fromARGB(255, 101, 98, 98),
+              backgroundColor: const Color.fromARGB(255, 49, 48, 48),
               text: _getLifeButtonText(index),
             ),
           ),

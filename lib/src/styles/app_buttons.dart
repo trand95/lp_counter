@@ -142,8 +142,17 @@ class _AppButtonsState extends State<AppButtons>
                 width: widget.width,
                 height: widget.height,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: widget.backgroundColor),
+                  borderRadius: BorderRadius.circular(8),
+                  color: widget.backgroundColor,
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 69, 67, 67),
+                      Colors.black,
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
                 child: Center(
                   child: Text(widget.text!,
                       style: TextStyle(

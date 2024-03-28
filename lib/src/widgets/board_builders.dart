@@ -3,12 +3,12 @@ import 'package:gap/gap.dart';
 import 'package:lp_counter/src/models/player.dart';
 
 List<Color> playerColors = [
-  Colors.red,
-  Colors.blue,
-  Colors.green,
-  Colors.yellow,
-  Colors.orange,
-  Colors.purple,
+  const Color.fromARGB(255, 255, 140, 66),
+  const Color.fromARGB(255, 64, 121, 140),
+  const Color.fromARGB(255, 124, 106, 10),
+  const Color.fromARGB(255, 141, 91, 76),
+  const Color.fromARGB(255, 140, 179, 105),
+  const Color.fromARGB(255, 246, 189, 96),
 ];
 
 Widget buildPlayerRow(
