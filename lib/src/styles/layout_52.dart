@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Layout52 extends StatelessWidget {
   final double height = 36;
   final double height_2 = 78;
-  final double width = 48;
+  final double width = 44;
   final Color borderColor;
 
   const Layout52({super.key, required this.borderColor});
@@ -31,7 +31,7 @@ class Layout52 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 95,
-      width: 180,
+      width: 160,
       decoration: BoxDecoration(
           border: Border.all(color: borderColor, width: 3),
           borderRadius: BorderRadius.circular(4),

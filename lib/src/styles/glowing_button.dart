@@ -19,7 +19,6 @@ class GlowingButton extends StatefulWidget {
 
 class _GlowingButtonState extends State<GlowingButton>
     with SingleTickerProviderStateMixin {
-  var scale = 1.0;
   late AnimationController _controller;
   late Animation _animation;
 

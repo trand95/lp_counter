@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class Layout62 extends StatelessWidget {
   final double height_1 = 76;
-  final double height_2 = 35;
-  final double width = 36;
+  final double height_2 = 36;
+  final double width = 32;
   final Color borderColor;
 
   const Layout62({super.key, required this.borderColor});
@@ -31,7 +31,7 @@ class Layout62 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 95,
-      width: 180,
+      width: 160,
       decoration: BoxDecoration(
           border: Border.all(color: borderColor, width: 3),
           borderRadius: BorderRadius.circular(4),

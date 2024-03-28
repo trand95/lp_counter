@@ -25,10 +25,10 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         toolbarHeight: 33,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         title: const Text(
           'Settings',
@@ -43,22 +43,25 @@ class _SettingScreenState extends State<SettingScreen> {
       body: Stack(children: [
         Image.asset(
           'assets/images/dark_background.jpg',
-          height: double.infinity,
-          width: double.infinity,
-          fit: BoxFit.fill,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
           child: Center(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Text('Players',
-                      style: TextStyle(
-                          color: white,
-                          fontSize: 20,
-                          letterSpacing: 5,
-                          fontWeight: FontWeight.bold)),
+                  const Text(
+                    'Players',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      letterSpacing: 5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const Gap(20),
                   _playerSection(),
                   const Gap(20),
@@ -82,6 +85,10 @@ class _SettingScreenState extends State<SettingScreen> {
                           fontWeight: FontWeight.bold)),
                   const Gap(20),
                   _lifeSection(),
+                  const Gap(20),
+                  SizedBox(
+                    width: double.infinity,
+                  ),
                   const Gap(50),
                   InkWell(
                     onTap: () {
@@ -168,9 +175,10 @@ class _SettingScreenState extends State<SettingScreen> {
                     child: AppButtons(
                       height: 50,
                       width: 250,
-                      color: white,
+                      color1: Colors.yellow,
+                      color2: Colors.deepOrange,
+                      textColor: white,
                       backgroundColor: Colors.orange,
-                      borderColor: Colors.orange,
                       text: 'Play',
                     ),
                   ),
@@ -181,6 +189,35 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
         ),
       ]),
+    );
+  }
+
+  Wrap _playerSection() {
+    return Wrap(
+      spacing: 30,
+      runSpacing: 30,
+      children: List.generate(
+        6,
+        (index) => InkWell(
+          onTap: () {
+            setState(() {
+              selectedPlayer = index;
+              isVisible = selectedPlayer >= 3;
+            });
+          },
+          child: AppButtons(
+              height: 60,
+              width: 90,
+              color1:
+                  selectedPlayer == index ? Colors.yellow : Colors.transparent,
+              color2: selectedPlayer == index
+                  ? Colors.deepOrange
+                  : Colors.transparent,
+              textColor: Colors.white,
+              backgroundColor: Color.fromARGB(255, 49, 48, 48),
+              text: (index + 1).toString()),
+        ),
+      ),
     );
   }
 
@@ -208,34 +245,6 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Wrap _playerSection() {
-    return Wrap(
-      spacing: 30,
-      runSpacing: 30,
-      children: List.generate(
-        6,
-        (index) => InkWell(
-          onTap: () {
-            setState(() {
-              selectedPlayer = index;
-              isVisible = selectedPlayer >= 3;
-            });
-          },
-          child: AppButtons(
-              height: 60,
-              width: 100,
-              color: white,
-              backgroundColor: const Color.fromARGB(255, 101, 98, 98),
-              borderColor: selectedPlayer == index
-                  ? white
-                  : const Color.fromARGB(255, 101, 98, 98),
-              isIcon: false,
-              text: (index + 1).toString()),
-        ),
-      ),
-    );
-  }
-
   Wrap _lifeSection() {
     return Wrap(
       spacing: 30,
@@ -255,13 +264,14 @@ class _SettingScreenState extends State<SettingScreen> {
             padding: const EdgeInsets.all(0.0),
             child: AppButtons(
               height: 100,
-              width: 168,
-              color: white,
+              width: 170,
+              color1:
+                  selectedLife == index ? Colors.yellow : Colors.transparent,
+              color2: selectedLife == index
+                  ? Colors.deepOrange
+                  : Colors.transparent,
+              textColor: Colors.white,
               backgroundColor: const Color.fromARGB(255, 101, 98, 98),
-              borderColor: selectedLife == index
-                  ? white
-                  : const Color.fromARGB(255, 101, 98, 98),
-              isIcon: false,
               text: _getLifeButtonText(index),
             ),
           ),
