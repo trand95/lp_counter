@@ -120,7 +120,6 @@ class _AppButtonsState extends State<AppButtons>
                 end: _bottomAlignmentAnimation.value,
               ),
               borderRadius: BorderRadius.circular(8),
-              color: widget.backgroundColor,
               boxShadow: [
                 BoxShadow(
                   color: widget.color1,
@@ -143,8 +142,9 @@ class _AppButtonsState extends State<AppButtons>
                 height: widget.height,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: widget.backgroundColor,
-                  gradient: LinearGradient(
+
+                  //color: widget.backgroundColor,
+                  gradient: const LinearGradient(
                     colors: [
                       Color.fromARGB(255, 69, 67, 67),
                       Colors.black,

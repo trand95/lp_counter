@@ -1,10 +1,11 @@
 import 'dart:ui';
-
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-
+import 'package:lp_counter/src/routes/routes_name.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:lp_counter/src/styles/glowing_button.dart';
+import 'package:wakelock/wakelock.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -89,7 +90,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),*/
                   const Gap(80),
-                  const GlowingButton(),
+                  GestureDetector(
+                    onTap: () => setState(
+                      () {
+                        context.goNamed(RouteNames.settings);
+                        Wakelock.enable();
+                      },
+                    ),
+                    child: const GlowingButton(buttonText: 'Start'),
+                  ),
                   /*ElevatedButton(
                     onPressed: () {
                       context.goNamed(RouteNames.settings);

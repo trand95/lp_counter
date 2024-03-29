@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lp_counter/src/routes/routes_name.dart';
-
+import 'package:lp_counter/src/styles/glowing_button.dart';
 import 'package:lp_counter/src/styles/app_buttons.dart';
 import 'package:lp_counter/src/styles/color.dart';
 import 'package:lp_counter/src/styles/custom_layout.dart';
@@ -163,19 +163,13 @@ class _SettingScreenState extends State<SettingScreen> {
                           context.push('/board1');
                       }
                     },
-                    child: AppButtons(
-                      height: 50,
-                      width: 250,
-                      color1: Colors.yellow,
-                      color2: Colors.deepOrange,
-                      textColor: white,
-                      backgroundColor: Colors.orange,
-                      text: 'Play',
+                    child: const GlowingButton(
+                      buttonText: 'Play',
                     ),
                   ),
-                  const Gap(50),
                   const SizedBox(
                     width: double.infinity,
+                    height: 50,
                   ),
                 ],
               ),

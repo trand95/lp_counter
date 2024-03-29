@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:wakelock/wakelock.dart';
-import 'package:go_router/go_router.dart';
-import 'package:lp_counter/src/routes/routes_name.dart';
-
 class GlowingButton extends StatefulWidget {
+  final String buttonText;
   const GlowingButton({
     super.key,
+    required this.buttonText,
   });
 
   @override
@@ -40,37 +38,37 @@ class _GlowingButtonState extends State<GlowingButton>
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => setState(
-        () {
-          context.goNamed(RouteNames.settings);
-          Wakelock.enable();
-        },
-      ),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 100),
-        height: 48,
-        width: 256,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          color: const Color.fromARGB(255, 27, 28, 30),
-          boxShadow: [
-            BoxShadow(
-              color: const Color.fromARGB(130, 237, 125, 58),
-              spreadRadius: _animation.value,
-              blurRadius: _animation.value,
-            ),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 100),
+      height: 48,
+      width: 256,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        color: const Color.fromARGB(255, 27, 28, 30),
+        gradient: const LinearGradient(
+          colors: [
+            Color.fromARGB(255, 69, 67, 67),
+            Colors.black,
           ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: const Center(
-          child: Text(
-            'Start',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: Colors.white,
-                letterSpacing: 5),
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromARGB(130, 237, 125, 58),
+            spreadRadius: _animation.value,
+            blurRadius: _animation.value,
           ),
+        ],
+      ),
+      child: Center(
+        child: Text(
+          widget.buttonText,
+          style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Colors.white,
+              letterSpacing: 5),
         ),
       ),
     );

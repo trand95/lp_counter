@@ -82,11 +82,17 @@ Widget buildContainer(
 }
 
 Widget buildDeltaText(constraints, showDeltaText, int delta) {
+  String deltaText = '';
+  if (delta > 0) {
+    deltaText = '+$delta';
+  } else if (delta < 0) {
+    deltaText = '$delta';
+  }
   return AnimatedOpacity(
     opacity: showDeltaText ? 1.0 : 0.0,
     duration: const Duration(milliseconds: 0),
     child: Text(
-      delta > 0 ? '+$delta' : '$delta',
+      deltaText,
       style: const TextStyle(
         // fontFamily: 'Arial',
         color: Colors.white,
