@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lp_counter/src/models/player.dart';
 import 'package:lp_counter/src/widgets/board_builders.dart';
+import 'package:lp_counter/src/dialogs/menu_dialog.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Board2Screen extends StatefulWidget {
   final int initLife;
@@ -99,16 +101,24 @@ class _Board2ScreenState extends State<Board2Screen> {
                 ),
               ),
               Align(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    color: Colors.white70,
-                    // iconSize: 30,
-                    icon: const Icon(Icons.menu),
-                    onPressed: () {},
+                child: GestureDetector(
+                  onTap: () {
+                    MenuDialog.show(context, (int selectedItemIndex) {});
+                  },
+                  child: Container(
+                    height: 46,
+                    width: 46,
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      shape: BoxShape.circle,
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/images/menu6.svg',
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                   ),
                 ),
               ),

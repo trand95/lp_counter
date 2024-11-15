@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lp_counter/src/models/player.dart';
+import 'package:lp_counter/src/styles/color.dart';
 import 'package:lp_counter/src/widgets/board_builders.dart';
 import 'package:lp_counter/src/dialogs/menu_dialog.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Board1Screen extends StatefulWidget {
   final int initLife;
@@ -84,49 +86,32 @@ class _Board1ScreenState extends State<Board1Screen> {
                 quarterTurns: 0,
                 child: buildPlayerRow(0, _updateLife, players, constraints),
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    color: Colors.white70,
-                    iconSize: 30,
-                    icon: const Icon(Icons.menu),
-                    onPressed: () {
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Align(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  child: GestureDetector(
+                    onTap: () {
                       MenuDialog.show(context, (int selectedItemIndex) {});
                     },
+                    child: Container(
+                      height: 46,
+                      width: 46,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                        shape: BoxShape.circle,
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/images/menu6.svg',
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              /*  Positioned(
-                top: 20,
-                right: 20,
-                child: Text(
-                  '$currentLife',
-                  style: const TextStyle(
-                    fontFamily: 'Arial',
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 200,
-                left: constraints.maxWidth * 0.5 - 10,
-                child: Text(
-                  delta > 0 ? '+$delta' : '$delta',
-                  style: const TextStyle(
-                    fontFamily: 'Arial',
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),*/
             ],
           );
         },
